@@ -1,0 +1,25 @@
+---
+strategy: static
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+polling_url: ''
+polling_headers: ''
+custom_fields:
+- keyname: name_1
+  field_type: string
+  name: Child's Name
+  description: Enter your child's name
+  placeholder: Emma
+- keyname: dob_1
+  field_type: date
+  name: Date of Birth
+  description: Enter your child's date of birth
+  placeholder: '2020-01-01'
+- keyname: time_zone
+  field_type: time_zone
+  name: Time Zone
+  description: Where are you located?
+name: Kids' Ages
+refresh_interval: 720
