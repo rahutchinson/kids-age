@@ -75,14 +75,19 @@
   {% assign secondary = '' %}
 {% endif %}
 
-<div class="view">
-  <div class="layout layout--col layout--center gap--medium">
-    <span class="value value--large">{{ name }}</span>
-    <span class="value value--xxxlarge">{{ primary_value }}</span>
-    <span class="label">{{ primary_unit }}</span>
-    {% if secondary != '' %}
-      <span class="label">{{ secondary }}</span>
-    {% endif %}
+<div class="layout layout--row layout--stretch gap">
+  <div class="flex flex--col">
+    <div class="content text--center stretch-y">
+      <span class="value value--large">{{ name }}</span>
+    </div>
+    <div class="content text--center">
+      <span class="value value--xxxlarge">{{ primary_value }}</span>
+      <span class="label">{{ primary_unit }}</span>
+      {% if secondary != '' %}
+        <span class="label">{{ secondary }}</span>
+      {% endif %}
+    </div>
+    <div class="content text--center stretch-y"></div>
   </div>
 </div>
 
