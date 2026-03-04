@@ -61,7 +61,7 @@
 {% endif %}
 
 {% comment %}Decide what to display as primary value{% endcomment %}
-{% if years >= 1 %}
+{% if years > 0 %}
   {% assign primary_value = years %}
   {% if years == 1 %}
     {% assign primary_unit = 'year old' %}
@@ -69,7 +69,7 @@
     {% assign primary_unit = 'years old' %}
   {% endif %}
   {% assign secondary = months | append: ' mo · ' | append: days | append: ' d' %}
-{% elsif months >= 1 %}
+{% elsif months > 0 %}
   {% assign primary_value = months %}
   {% if months == 1 %}
     {% assign primary_unit = 'month old' %}
@@ -90,10 +90,8 @@
 <div class="view view--full">
   <div class="layout layout--col layout--center gap--large">
     <span class="value value--xlarge">{{ name }}</span>
-    <div class="layout layout--col layout--center gap--small">
-      <span class="value value--xxxlarge">{{ primary_value }}</span>
-      <span class="label">{{ primary_unit }}</span>
-    </div>
+    <span class="value value--xxxlarge">{{ primary_value }}</span>
+    <span class="label">{{ primary_unit }}</span>
     {% if secondary != '' %}
       <span class="description">{{ secondary }}</span>
     {% endif %}
