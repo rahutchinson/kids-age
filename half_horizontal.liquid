@@ -76,15 +76,13 @@
 {% endif %}
 
 <div class="view">
-  <div class="layout layout--row layout--center gap--large">
-    <span class="value value--xxlarge">{{ name }}</span>
-    <div class="layout layout--col layout--center gap--small">
-      <span class="value value--xxxlarge">{{ primary_value }}</span>
-      <span class="label">{{ primary_unit }}</span>
-      {% if secondary != '' %}
-        <span class="description">{{ secondary }}</span>
-      {% endif %}
-    </div>
+  <div class="layout layout--col layout--center gap--small">
+    <span class="value value--large">{{ name }}</span>
+    <span class="value value--xxxlarge">{{ primary_value }}</span>
+    <span class="label">{{ primary_unit }}</span>
+    {% if secondary != '' %}
+      <span class="label">{{ secondary }}</span>
+    {% endif %}
   </div>
 </div>
 
