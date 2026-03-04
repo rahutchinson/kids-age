@@ -2,39 +2,29 @@
 {% assign dob = trmnl:plugin_settings:custom_fields_values:dob_1 | default: '2020-01-01' %}
 {% assign timezone = trmnl:plugin_settings:custom_fields_values:time_zone | default: 'UTC' %}
 
-{% comment %}Get today's date in user's timezone, same pattern as countdown plugin{% endcomment %}
 {% assign today_str = 'now' | date: '%Y-%m-%d %H:%M:%S' | date: '%s' | timezone: timezone | date: '%Y-%m-%d' %}
 
-{% comment %}Unix seconds for both dates{% endcomment %}
 {% assign today_s = today_str | date: '%s' | plus: 0 %}
 {% assign dob_s = dob | date: '%s' | plus: 0 %}
-
-{% comment %}Total days alive (opposite of countdown: today - dob){% endcomment %}
 {% assign diff_s = today_s | minus: dob_s %}
 {% assign total_days = diff_s | divided_by: 86400 %}
 
-{% comment %}Extract year/month/day components from each date{% endcomment %}
 {% assign today_year  = today_str | date: '%Y' | plus: 0 %}
 {% assign today_month = today_str | date: '%m' | plus: 0 %}
 {% assign today_day   = today_str | date: '%d' | plus: 0 %}
-
 {% assign dob_year  = dob | date: '%Y' | plus: 0 %}
 {% assign dob_month = dob | date: '%m' | plus: 0 %}
 {% assign dob_day   = dob | date: '%d' | plus: 0 %}
 
-{% comment %}Raw differences{% endcomment %}
 {% assign years  = today_year  | minus: dob_year %}
 {% assign months = today_month | minus: dob_month %}
 {% assign days   = today_day   | minus: dob_day %}
 
-{% comment %}Borrow from months if days is negative{% endcomment %}
 {% if days < 0 %}
   {% assign months = months | minus: 1 %}
   {% assign prev_month = today_month | minus: 1 %}
   {% if prev_month == 0 %}{% assign prev_month = 12 %}{% endif %}
-
   {% if prev_month == 2 %}
-    {% comment %}Leap year check for February{% endcomment %}
     {% assign lc4   = today_year | modulo: 4 %}
     {% assign lc100 = today_year | modulo: 100 %}
     {% assign lc400 = today_year | modulo: 400 %}
@@ -54,13 +44,11 @@
   {% endif %}
 {% endif %}
 
-{% comment %}Borrow from years if months is negative{% endcomment %}
 {% if months < 0 %}
   {% assign years  = years  | minus: 1 %}
   {% assign months = months | plus: 12 %}
 {% endif %}
 
-{% comment %}Decide what to display as primary value{% endcomment %}
 {% if years > 0 %}
   {% assign primary_value = years %}
   {% if years == 1 %}
@@ -88,14 +76,13 @@
 {% endif %}
 
 <div class="view">
-  <div class="layout layout--col layout--center gap--large">
-    <span class="value value--xlarge">{{ name }}</span>
+  <div class="layout layout--col layout--center gap--medium">
+    <span class="value value--large">{{ name }}</span>
     <span class="value value--xxxlarge">{{ primary_value }}</span>
     <span class="label">{{ primary_unit }}</span>
     {% if secondary != '' %}
       <span class="label">{{ secondary }}</span>
     {% endif %}
-    <span class="description">{{ total_days }} days since birth</span>
   </div>
 </div>
 

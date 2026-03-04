@@ -23,3 +23,6 @@ custom_fields:
   description: Where are you located?
 name: Kids' Ages
 refresh_interval: 720
+custom_fields_support:
+- keyname: author_bio
+  field_type: author_bio
